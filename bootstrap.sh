@@ -30,6 +30,8 @@ if ! command -v git > /dev/null 2>&1; then
     fi
 fi
 
+log "Bootstrapping on ${OS}, ${DISTRO}"
+
 # install oh-my-zsh
 ZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
 ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-$ZSH_DIR/custom}"
@@ -93,11 +95,11 @@ if ! command -v zoxide >/dev/null 2>&1; then
                 curl -fsSL https://apt.cli.rs/rust-tools.list | sudo tee /etc/apt/sources.list.d/rust-tools.list
                 sudo apt update
                 apt show ripgrep
-                apt install zoxide
+                apt install -y zoxide
                 ;;
             fedora)
                 log "Installing zoxide via dnf..."
-                dnf install zoxide
+                dnf install -y zoxide
                 ;;
             *)
                 warn "No known package manager for '$DISTRO'. Skipping zoxide."
@@ -106,6 +108,29 @@ if ! command -v zoxide >/dev/null 2>&1; then
     fi
 else 
     log "zoxide already installed."
+fi
+
+# install lsd
+if [[ "$OS" == "Darwin" ]]; then
+    brew instal lsd
+elif [[ "$OS" == Linux ]]; then
+    case "$DISTRO" in
+        arch|archlinux)
+            log "Installing lsd via pacman..."
+            pacman -S lsd
+            ;;
+        ubuntu|debian)
+            log "Installing lsd via apt..."
+            apt install -y lsd
+            ;;
+        fedora)
+            log "Installing zoxide via dnf..."
+            dnf install -y lsd
+            ;;
+        *)
+            warn "No known package manager for '$DISTRO'. Skipping zoxide."
+            ;;
+    esac
 fi
 
 log "Bootstrap finished. Link your dotfiles next."

@@ -1,4 +1,12 @@
 ## Dependencies:
+
+MacOS:
+- Homebrew
+
+Linux:
+- package manager for your distro (apt, dnf, pacman, yay, ...)
+
+Common:
 - git
 - gcc
 - g++
@@ -9,7 +17,6 @@
 
 - ghostty
 - zsh
-
 - go
 - tree-sitter-cli
 - nodejs
@@ -23,7 +30,7 @@
 ```
 
 ## ZSH Configure
-- `zsh/alias.zsh`: your aliases
-- `zsh/path.zsh:`: your $PATH
+- `zsh/alias.zsh`: aliases
+- `zsh/path.zsh:`: $PATH
 - `zsh/config.zsh`: other configurations
 
