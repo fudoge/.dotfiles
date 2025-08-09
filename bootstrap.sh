@@ -111,26 +111,30 @@ else
 fi
 
 # install lsd
-if [[ "$OS" == "Darwin" ]]; then
-    brew instal lsd
-elif [[ "$OS" == Linux ]]; then
-    case "$DISTRO" in
-        arch|archlinux)
-            log "Installing lsd via pacman..."
-            pacman -S lsd
-            ;;
-        ubuntu|debian)
-            log "Installing lsd via apt..."
-            apt install -y lsd
-            ;;
-        fedora)
-            log "Installing zoxide via dnf..."
-            dnf install -y lsd
-            ;;
-        *)
-            warn "No known package manager for '$DISTRO'. Skipping zoxide."
-            ;;
-    esac
+if ! command -v lsd > /dev/null 2>&1; then
+    if [[ "$OS" == "Darwin" ]]; then
+        brew instal lsd
+    elif [[ "$OS" == Linux ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing lsd via pacman..."
+                pacman -S lsd
+                ;;
+            ubuntu|debian)
+                log "Installing lsd via apt..."
+                apt install -y lsd
+                ;;
+            fedora)
+                log "Installing zoxide via dnf..."
+                dnf install -y lsd
+                ;;
+            *)
+                warn "No known package manager for '$DISTRO'. Skipping zoxide."
+                ;;
+        esac
+    fi
+else
+    log "lsd already installed"
 fi
 
 log "Bootstrap finished. Link your dotfiles next."
