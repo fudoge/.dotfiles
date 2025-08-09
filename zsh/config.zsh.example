@@ -1,0 +1,5 @@
+# Conda lazy-load
+alias activate_conda='source /opt/anaconda3/etc/profile.d/conda.sh && conda activate'
+
+# kubectx & kubectl
+[ -f /opt/homebrew/share/zsh/site-functions/_kubectx ] && fpath+=(/opt/homebrew/share/zsh/site-functions)
