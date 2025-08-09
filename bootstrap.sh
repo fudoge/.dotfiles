@@ -108,4 +108,4 @@ else
     log "zoxide already installed."
 fi
 
-log "Bootstrap finished. Link your dotfiles next (e.g., stow zsh git nvim)"
+log "Bootstrap finished. Link your dotfiles next."
