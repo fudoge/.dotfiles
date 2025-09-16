@@ -33,3 +33,5 @@ source "$ALIAS_PATH"
 
 # Etc config
 CONFIG_PATH="$HOME/.dotfiles/zsh/config.zsh"
+
+. "$HOME/.local/bin/env"
