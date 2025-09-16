@@ -19,6 +19,10 @@ else
     GHOSTTY_DST="$HOME/.config/ghostty/config"
 fi
 
+# Ghostty shaders path
+GHOSTTY_SHADERS_SRC="$DOTFILES_DIR/ghostty/shaders"
+GHOSTTY_SHADERS_DST="$(dirname "$GHOSTTY_DST")/shaders"
+
 # --- links ----------
 LINKS=(
     "$DOTFILES_DIR/zsh/.zshrc:$HOME/.zshrc"
@@ -26,6 +30,7 @@ LINKS=(
     "$DOTFILES_DIR/tmux/.tmux.conf:$HOME/.tmux.conf"
     "$DOTFILES_DIR/nvim:$HOME/.config/nvim"
     "${GHOSTTY_SRC}:${GHOSTTY_DST}"
+    "${GHOSTTY_SHADERS_SRC}:${GHOSTTY_SHADERS_DST}"
 )
 
 ensure_parent_dir() {
