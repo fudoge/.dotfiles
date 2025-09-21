@@ -26,7 +26,9 @@ return {
                 "yamlls",
                 "pyright",
                 "dockerls",
-                "terraformls"
+                "terraformls",
+                "helm_ls",
+                "gh_actions_ls"
             },
             automatic_installation = true,
         },
@@ -38,27 +40,28 @@ return {
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require("lspconfig")
-            lspconfig.lua_ls.setup({})
-            lspconfig.ts_ls.setup({})
-            lspconfig.gopls.setup({})
-            lspconfig.bashls.setup({})
-            lspconfig.cssls.setup({})
-            lspconfig.clangd.setup({
+            vim.lsp.config("lua_ls", {})
+            vim.lsp.config("ts_ls", {})
+            vim.lsp.config("gopls", {})
+            vim.lsp.config("bashls", {})
+            vim.lsp.config("cssls", {})
+            vim.lsp.config("clangd", {
                 cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" },
                 args = { "--include-directory=/usr/local/include" },
             })
-            lspconfig.docker_compose_language_service.setup({})
-            lspconfig.graphql.setup({})
-            lspconfig.jdtls.setup({})
-            lspconfig.biome.setup({})
-            lspconfig.ltex.setup({})
-            lspconfig.nginx_language_server.setup({})
-            lspconfig.sqls.setup({})
-            lspconfig.yamlls.setup({})
-            lspconfig.pyright.setup({})
-            lspconfig.dockerls.setup({})
-            lspconfig.terraformls.setup({})
+            vim.lsp.config("docker_compose_language_service", {})
+            vim.lsp.config("graphql", {})
+            vim.lsp.config("jdtls", {})
+            vim.lsp.config("biome", {})
+            vim.lsp.config("ltex", {})
+            vim.lsp.config("nginx_language_server", {})
+            vim.lsp.config("sqls", {})
+            vim.lsp.config("yamlls", {})
+            vim.lsp.config("pyright", {})
+            vim.lsp.config("dockerls", {})
+            vim.lsp.config("terraformls", {})
+            vim.lsp.config("helm_ls", {})
+            vim.lsp.config("gh_actions_ls", {})
 
             -- vim.lsp.buf.hover
             -- vim.lsp.buf.definition
