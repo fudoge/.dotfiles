@@ -41,7 +41,13 @@ return {
         }
         -- set menu items
         dashboard.section.buttons.val = {
-            dashboard.button("n", "🆕 > New file", "ene <BAR> startinsert <CR>"),
+            dashboard.button("n", "🆕 > New file", function()
+                local fname = vim.fn.input("New file: ")
+                if fname ~= "" then
+                    vim.cmd("edit " .. fname)
+                    vim.cmd("startinsert")
+                end
+            end),
             dashboard.button("f", "🔍 > Find file", ":Telescope find_files<CR>"),
             dashboard.button("w", "👀 > Find Word", ":Telescope live_grep<CR>"),
             dashboard.button("r", "📗 > Recent", ":Telescope oldfiles<CR>"),
