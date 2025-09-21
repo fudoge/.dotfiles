@@ -114,7 +114,7 @@ return {
 
             -- vim.lsp.buf.definition
             -- vim.lsp.buf.code_action
-            keyMapper("gd", vim.lsp.buf.definition())
+            keyMapper("gd", vim.lsp.buf.definition)
             keyMapper("<leader>ca", vim.lsp.buf.code_action)
         end,
     },
