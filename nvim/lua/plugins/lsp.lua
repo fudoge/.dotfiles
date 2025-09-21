@@ -46,8 +46,7 @@ return {
             vim.lsp.config("bashls", {})
             vim.lsp.config("cssls", {})
             vim.lsp.config("clangd", {
-                cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" },
-                args = { "--include-directory=/usr/local/include" },
+                cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google", "--include-directory=/usr/local/include" },
             })
             vim.lsp.config("docker_compose_language_service", {})
             vim.lsp.config("graphql", {})
@@ -62,6 +61,28 @@ return {
             vim.lsp.config("terraformls", {})
             vim.lsp.config("helm_ls", {})
             vim.lsp.config("gh_actions_ls", {})
+
+            vim.lsp.enable({
+                "lua_ls",
+                "ts_ls",
+                "gopls",
+                "bashls",
+                "cssls",
+                "clangd",
+                "docker_compose_language_service",
+                "graphql",
+                "jdtls",
+                "biome",
+                "ltex",
+                "nginx_language_server",
+                "sqls",
+                "yamlls",
+                "pyright",
+                "dockerls",
+                "terraformls",
+                "helm_ls",
+                "gh_actions_ls"
+            })
 
             -- vim.lsp.buf.hover
             -- vim.lsp.buf.definition
