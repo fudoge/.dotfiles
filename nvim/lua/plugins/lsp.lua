@@ -32,7 +32,17 @@ return {
     -- Mason is responsible for installing LSPs.
     {
         "williamboman/mason.nvim",
-        opts = { PATH = "prepend" },
+        opts = {
+            PATH = "prepend",
+            ui = {
+                border = "rounded",
+                icons = {
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗"
+                },
+            },
+        },
         config = function(_, opts) require("mason").setup(opts) end,
     },
 
