@@ -5,10 +5,10 @@ local function root(patterns, fname)
 end
 
 local roots = {
-    lua_ls = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", "stylua.toml", "selene.toml", "seleme.yml", ".git" },
+    lua_ls = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", "stylua.toml", "selene.toml", "selene.yml", ".git" },
     ts_ls = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
     gopls = { "go.work", "go.mod", ".git" },
-    pyright = { "pyproject.toml", "setup.py", "setup.cfg", "requrements.txt", "Pipfile", "pyrightconfig.json", ".git" },
+    pyright = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
     yamlls = { ".git" },
     terraformls = { ".terraform", ".git" },
     dockerls = { "Dockerfile", ".git" },
@@ -27,8 +27,9 @@ local roots = {
 }
 
 local function rd(name)
+    local pats = roots[name] or { ".git" }
     return function(fname)
-        return root(roots[name] or { ".git" }, fname)
+        return root(pats, fname) or (fname and vim.fs.dirname(fname) ~= "" and vim.fs.dirname(fname)) or vim.loop.cwd()
     end
 end
 
@@ -80,8 +81,7 @@ return {
             vim.lsp.config("gopls", { root_dir = rd("gopls") })
             vim.lsp.config("bashls", { root_dir = rd("bashls") })
             vim.lsp.config("cssls", { root_dir = rd("cssls") })
-            vim.lsp.config("clangd", { root_dir = rd("cssls") },
-                { cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" } })
+            vim.lsp.config("clangd", { root_dir = rd("clangd"), cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" }, single_file_support = true, } )
             vim.lsp.config("docker_compose_language_service", { root_dir = rd("docker_compose_language_service") })
             vim.lsp.config("graphql", { root_dir = rd("graphql") })
             vim.lsp.config("jdtls", { root_dir = rd("jdtls") })
