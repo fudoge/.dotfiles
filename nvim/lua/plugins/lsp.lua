@@ -1,9 +1,4 @@
-local keyMapper = require("utils.keyMapper").mapKey
-
-local function root(patterns, fname)
-    return vim.fs.root(fname or 0, patterns)
-end
-
+-- Root Markers
 local roots = {
     lua_ls = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", "stylua.toml", "selene.toml", "selene.yml", ".git" },
     ts_ls = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
@@ -16,106 +11,69 @@ local roots = {
     bashls = { ".git" },
     graphql = { ".git" },
     sqls = { ".config.yml", ".git" },
-    clangd = { ".clangd", "compile_commands.json", "compile_flags.json", ".git" },
+    clangd = { ".clangd", "compile_commands.json", "compile_flags.txt", ".git" },
     docker_compose_language_service = { "docker-compose.yaml", "docker-compose.yml", "compose.yml", "compose.yaml", ".git" },
     ltex = { ".git" },
     nginx_language_server = { "nginx.conf", ".git" },
     jdtls = { ".git", "pom.xml", "build.gradle", "build.gradle.kts" },
     biome = { "biome.json", "biome.jsonc", "package.json", ".git" },
     helm_ls = { "Chart.yaml", ".git" },
-    gh_actions_ls = { ".git" }
+    gh_actions_ls = { ".git" },
 }
 
-local function rd(name)
-    local pats = roots[name] or { ".git" }
-    return function(fname)
-        return root(pats, fname) or (fname and vim.fs.dirname(fname) ~= "" and vim.fs.dirname(fname)) or vim.loop.cwd()
-    end
-end
-
-local lsp_list = {
-    "lua_ls",
-    "ts_ls",
-    "gopls",
-    "bashls",
-    "cssls",
-    "clangd",
-    "docker_compose_language_service",
-    "graphql",
-    "jdtls",
-    "biome",
-    "ltex",
-    "nginx_language_server",
-    "sqls",
-    "yamlls",
-    "pyright",
-    "dockerls",
-    "terraformls",
-    "helm_ls",
-    "gh_actions_ls"
-
+local servers = {
+    "lua_ls", "ts_ls", "gopls", "bashls", "cssls", "clangd",
+    "docker_compose_language_service", "graphql", "jdtls", "biome", "ltex",
+    "nginx_language_server", "sqls", "yamlls", "pyright", "dockerls",
+    "terraformls", "helm_ls", "gh_actions_ls",
 }
 
 return {
+    -- Mason is responsible for installing LSPs.
     {
         "williamboman/mason.nvim",
-        opts = {},
+        opts = { PATH = "prepend" },
+        config = function(_, opts) require("mason").setup(opts) end,
     },
-    {
-        "williamboman/mason-lspconfig.nvim",
-        dependencies = { "neovim/nvim-lspconfig" },
-        opts = {
-            ensure_installed = lsp_list, automatic_installation = true,
-        },
-        config = function()
-            require("mason").setup({})
-            require("mason-lspconfig").setup({})
-        end,
-    },
+
+    -- lspconfig for catalog only.
+    { "neovim/nvim-lspconfig" },
+
+    -- Native LSPs
     {
         "neovim/nvim-lspconfig",
         config = function()
-            vim.lsp.config("*", { single_file_support = false })
-            vim.lsp.config("lua_ls", { root_dir = rd("lua_ls") })
-            vim.lsp.config("ts_ls", { root_dir = rd("ts_ls") })
-            vim.lsp.config("gopls", { root_dir = rd("gopls") })
-            vim.lsp.config("bashls", { root_dir = rd("bashls") })
-            vim.lsp.config("cssls", { root_dir = rd("cssls") })
-            vim.lsp.config("clangd", { root_dir = rd("clangd"), cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" }, single_file_support = true, } )
-            vim.lsp.config("docker_compose_language_service", { root_dir = rd("docker_compose_language_service") })
-            vim.lsp.config("graphql", { root_dir = rd("graphql") })
-            vim.lsp.config("jdtls", { root_dir = rd("jdtls") })
-            vim.lsp.config("biome", { root_dir = rd("biome") })
-            vim.lsp.config("ltex", { root_dir = rd("ltex") })
-            vim.lsp.config("nginx_language_server", { root_dir = rd("nginx_language_server") })
-            vim.lsp.config("sqls", { root_dir = rd("sqls") })
-            vim.lsp.config("yamlls", { root_dir = rd("yamlls") })
-            vim.lsp.config("pyright", { root_dir = rd("pyright") })
-            vim.lsp.config("dockerls", { root_dir = rd("dockerls") })
-            vim.lsp.config("terraformls", { root_dir = rd("terraformls") })
-            vim.lsp.config("helm_ls", { root_dir = rd("helm_ls") })
-            vim.lsp.config("gh_actions_ls", { root_dir = rd("gh_actions_ls") })
-
-            local function enable_for_buf(names)
-                local bufnr = 0
-                local need = {}
-                for _, name in ipairs(names) do
-                    if #vim.lsp.get_clients({ name = name, bufnr = bufnr }) == 0 then
-                        table.insert(need, name)
-                    end
-                end
-                if #need > 0 then vim.lsp.enable(need) end
-            end
-
-            enable_for_buf(lsp_list)
-            vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-                callback = function() enable_for_buf(lsp_list) end
+            -- global config
+            vim.lsp.config("*", {
+                root_markers = { ".git" },
             })
 
-            -- vim.lsp.buf.definition
-            -- vim.lsp.buf.code_action
-            keyMapper("gd", vim.lsp.buf.definition)
-            keyMapper("<leader>ca", vim.lsp.buf.code_action)
+            for name, markers in pairs(roots) do
+                vim.lsp.config(name, {
+                    root_markers = markers,
+                })
+            end
+
+            -- overwirte config for something special(e.g. clang)
+            vim.lsp.config("clangd", {
+                root_markers = roots.clangd,
+                cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" },
+            })
+
+            -- auto-enable
+            vim.lsp.enable(servers)
+
+            -- keymappings
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local buf = args.buf
+                    local function bufmap(lhs, rhs)
+                        vim.keymap.set("n", lhs, rhs, { buffer = buf, silent = true })
+                    end
+                    bufmap("gd", vim.lsp.buf.definition)
+                    bufmap("<leader>ca", vim.lsp.buf.code_action)
+                end,
+            })
         end,
     },
 }
