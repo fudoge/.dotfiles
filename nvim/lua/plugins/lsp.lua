@@ -6,7 +6,7 @@ local roots = {
     pyright = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
     yamlls = { ".git" },
     terraformls = { ".terraform", ".git" },
-    dockerls = { "Dockerfile", ".git" },
+    dockerls = { "Dockerfile", "Containerfile", ".git" },
     cssls = { "package.json", ".git" },
     bashls = { ".git" },
     graphql = { ".git" },
@@ -18,7 +18,7 @@ local roots = {
     jdtls = { ".git", "pom.xml", "build.gradle", "build.gradle.kts" },
     biome = { "biome.json", "biome.jsonc", "package.json", ".git" },
     helm_ls = { "Chart.yaml", ".git" },
-    gh_actions_ls = { ".git" },
+    gh_actions_ls = { ".github/workflows", ".git" },
 }
 
 local servers = {
