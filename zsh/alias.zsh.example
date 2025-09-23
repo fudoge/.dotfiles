@@ -1,4 +1,0 @@
-alias cl='clear'
-alias ls='lsd'
-alias tf='terraform'
-alias cd='z'

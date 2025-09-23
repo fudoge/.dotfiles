@@ -34,7 +34,6 @@ log "Bootstrapping on ${OS}, ${DISTRO}"
 
 # install oh-my-zsh
 ZSH_DIR="${ZSH:-$HOME/.oh-my-zsh}"
-ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-$ZSH_DIR/custom}"
 
 if [[ ! -d "$ZSH_DIR" ]]; then
     log "Installing oh-my-zsh (non-interactive)..."
@@ -50,24 +49,24 @@ if [[ -f "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
 fi
 
 # install spaceship-prompt.sh
-if [[ ! -d "$ZSH_CUSTOM_DIR/themes/spaceship-prompt" ]]; then
+if [[ ! -d "$ZSH_DIR/themes/spaceship-prompt" ]]; then
     log "Cloning spaceship-prompt..."
-    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM_DIR/themes/spaceship-prompt" --depth=1
+    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_DIR/themes/spaceship-prompt" --depth=1
 else 
     log "spaceship-prompt already present"
 fi
 
 # install zsh-syntax-highlighting plugin
-if [[ ! -d "$ZSH_CUSTOM_DIR/plugins/zsh-syntax-highlighting" ]]; then
+if [[ ! -d "$ZSH_DIR/plugins/zsh-syntax-highlighting" ]]; then
     log "Cloning zsh-syntax-highlighting..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM_DIR/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_DIR/plugins/zsh-syntax-highlighting
 else 
     log "zsh-syntax-highlighting already present"
 fi
 
 # install zsh-autocomplete
-if [[ ! -d "$ZSH_CUSTOM_DIR/plugins/zsh-autocomplete" ]]; then
-    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_CUSTOM_DIR/plugins/zsh-autocomplete
+if [[ ! -d "$ZSH_DIR/plugins/zsh-autocomplete" ]]; then
+    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_DIR/plugins/zsh-autocomplete
 else
     log "zsh-autocomplete already present"
 fi
