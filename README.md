@@ -6,7 +6,7 @@ MacOS:
 Linux:
 - package manager for your distro (apt, dnf, pacman, yay, ...)
 
-Common:
+Required:
 - git
 - gcc
 - g++
@@ -21,6 +21,12 @@ Common:
 - tree-sitter-cli
 - nodejs
 - python3
+- github-cli
+
+Arch Linux Example
+```bash
+pacman -S git gcc make cmake neovim tmux ghostty zsh tree-sitter-cli nodejs python3 github-cli
+```
 
 ## Installation
 ```bash
