@@ -25,7 +25,7 @@ Required:
 
 Arch Linux Example
 ```bash
-pacman -S git gcc make cmake neovim tmux ghostty zsh tree-sitter-cli nodejs python3 github-cli
+pacman -S git gcc make cmake neovim tmux ghostty zsh tree-sitter-cli nodejs python3 github-cli zsh-autocomplete-git
 ```
 
 ## Installation
