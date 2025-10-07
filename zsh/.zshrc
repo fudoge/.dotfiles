@@ -10,7 +10,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="spaceship"
 
 # zsh plugins
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting zoxide)
+plugins=(git zsh-autocomplete zsh-syntax-highlighting zoxide)
 
 source $ZSH/oh-my-zsh.sh
 
