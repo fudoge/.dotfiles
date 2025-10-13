@@ -41,7 +41,7 @@ require("lazy").setup({
 -- Setup yank to system clipboard..
 local universal_utils = require("config.universal")
 
-if universal_utils.is_mac() or universal_utils.is_windows() then
+if universal_utils.is_mac() or universal_utils.is_windows() or universal_utils.is_linux then
     vim.opt.clipboard:append { "unnamedplus" }
 elseif universal_utils.is_wsl() then
     vim.opt.clipboard:append { "unnamedplus" }
@@ -54,19 +54,6 @@ elseif universal_utils.is_wsl() then
         paste = {
             ['+'] = "win32yank.exe -o -lf",
             ['*'] = "win32yank.exe -o --lf",
-        },
-        cache_enabled = 0,
-    }
-elseif universal_utils.is_linux() then
-    vim.g.clipboard = {
-        name = "xclip",
-        copy = {
-            ["+"] = "xclip -selection clipboard",
-            ["*"] = "xclip -selection primary",
-        },
-        paste = {
-            ["+"] = "xclip -selection clipboard -o",
-            ["*"] = "xclip -selection primary -o",
         },
         cache_enabled = 0,
     }

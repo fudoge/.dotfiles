@@ -51,7 +51,8 @@ fi
 # install spaceship-prompt.sh
 if [[ ! -d "$ZSH_DIR/themes/spaceship-prompt" ]]; then
     log "Cloning spaceship-prompt..."
-    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_DIR/themes/spaceship-prompt" --depth=1
+    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM_DIR/themes/spaceship-prompt" --depth=1
+    ln -s "$ZSH_CUSTOM_DIR/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM_DIR/themes/spaceship.zsh-theme"
 else 
     log "spaceship-prompt already present"
 fi
