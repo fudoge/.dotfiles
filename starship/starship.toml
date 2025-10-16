@@ -3,7 +3,7 @@ truncate_to_repo = false
 
 [time]
 disabled = false
-format = '🕙[\[ $time \]]($style) '
+format = '$time ($style) '
 
 [cpp]
 disabled = false
