@@ -7,8 +7,6 @@ source "$PATH_DIR"
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="spaceship"
-
 # zsh plugins
 plugins=(git zsh-autocomplete zsh-syntax-highlighting zoxide)
 
@@ -33,3 +31,6 @@ source "$ALIAS_PATH"
 
 # Etc config
 CONFIG_PATH="$HOME/.dotfiles/zsh/config.zsh"
+
+# starship
+eval "$(starship init zsh)"

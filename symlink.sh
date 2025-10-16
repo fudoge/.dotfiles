@@ -31,6 +31,7 @@ LINKS=(
     "$DOTFILES_DIR/nvim:$HOME/.config/nvim"
     "${GHOSTTY_SRC}:${GHOSTTY_DST}"
     "${GHOSTTY_SHADERS_SRC}:${GHOSTTY_SHADERS_DST}"
+    "$DOTFILES_DIR/starship/starship.toml:$HOME/.config/starship.toml"
 )
 
 ensure_parent_dir() {

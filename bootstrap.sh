@@ -49,15 +49,6 @@ if [[ -f "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
     mv -f "$HOME/.zshrc" "$HOME/.zshrc.bak"
 fi
 
-# install spaceship-prompt.sh
-if [[ ! -d "$ZSH_CUSTOM_DIR/themes/spaceship-prompt" ]]; then
-    log "Cloning spaceship-prompt..."
-    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM_DIR/themes/spaceship-prompt" --depth=1
-    ln -s "$ZSH_CUSTOM_DIR/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM_DIR/themes/spaceship.zsh-theme"
-else 
-    log "spaceship-prompt already present"
-fi
-
 # install zsh-syntax-highlighting plugin
 if [[ ! -d "$ZSH_CUSTOM_DIR/plugins/zsh-syntax-highlighting" ]]; then
     log "Cloning zsh-syntax-highlighting..."
@@ -114,8 +105,8 @@ fi
 # install lsd
 if ! command -v lsd > /dev/null 2>&1; then
     if [[ "$OS" == "Darwin" ]]; then
-        brew instal lsd
-    elif [[ "$OS" == Linux ]]; then
+        brew install lsd
+    elif [[ "$OS" == "Linux" ]]; then
         case "$DISTRO" in
             arch|archlinux)
                 log "Installing lsd via pacman..."
@@ -136,6 +127,33 @@ if ! command -v lsd > /dev/null 2>&1; then
     fi
 else
     log "lsd already installed"
+fi
+
+# install starship
+if ! command -v starship > /dev/null 2>&1; then
+    if [[ "$OS" == "Darwin" ]]; then
+        brew install starship
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing starship via pacman..."
+                pacman -S starship
+                ;;
+            ubuntu|debian)
+                log "Installing starship via apt..."
+                apt install -y starship
+                ;;
+            fedora)
+                log "Installing starship via dnf..."
+                dnf install -y starship
+                ;;
+            *)
+                warn "No known package manager for '$DISTRO'. Skipping starship."
+                ;;
+        esac
+    fi
+else
+    log "starship prompt already installed"
 fi
 
 log "Bootstrap finished. Link your dotfiles next."

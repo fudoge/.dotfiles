@@ -1,0 +1,9 @@
+[directory]
+truncate_to_repo = false
+
+[time]
+disabled = false
+format = '🕙[\[ $time \]]($style) '
+
+[cpp]
+disabled = false
