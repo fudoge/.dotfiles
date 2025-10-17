@@ -48,17 +48,20 @@ if [[ -f "$HOME/.zshrc" && ! -L "$HOME/.zshrc" ]]; then
     mv -f "$HOME/.zshrc" "$HOME/.zshrc.bak"
 fi
 
-# install zsh-syntax-highlighting plugin
-if [[ ! -d "$ZSH_DIR/plugins/zsh-syntax-highlighting" ]]; then
-    log "Cloning zsh-syntax-highlighting..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_DIR/plugins/zsh-syntax-highlighting
+# install fast-syntax-highlighting plugin
+FZH_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting"
+if [[ ! -d "$FZH_DIR" ]]; then
+    log "Cloning fast-syntax-highlighting..."
+    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git \
+  ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/fast-syntax-highlighting
 else 
     log "zsh-syntax-highlighting already present"
 fi
 
-# install zsh-autocomplete
-if [[ ! -d "$ZSH_DIR/plugins/zsh-autocomplete" ]]; then
-    git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git $ZSH_DIR/plugins/zsh-autocomplete
+# install zsh-autosuggestions
+ZAS_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+if [[ ! -d "$ZAS_DIR" ]]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 else
     log "zsh-autocomplete already present"
 fi
