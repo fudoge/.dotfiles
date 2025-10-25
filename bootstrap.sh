@@ -63,7 +63,7 @@ ZAS_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 if [[ ! -d "$ZAS_DIR" ]]; then
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 else
-    log "zsh-autocomplete already present"
+    log "zsh-autosuggestions already present"
 fi
 
 # install zoxide
