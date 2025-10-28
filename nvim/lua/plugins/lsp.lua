@@ -19,13 +19,14 @@ local roots = {
     biome = { "biome.json", "biome.jsonc", "package.json", ".git" },
     helm_ls = { "Chart.yaml", ".git" },
     gh_actions_ls = { ".github/workflows", ".git" },
+    rust_analyzer = { "Cargo.toml", ".git" }
 }
 
 local servers = {
     "lua_ls", "ts_ls", "gopls", "bashls", "cssls", "clangd",
     "docker_compose_language_service", "graphql", "jdtls", "biome", "ltex",
     "nginx_language_server", "sqls", "yamlls", "pyright", "dockerls",
-    "terraformls", "helm_ls", "gh_actions_ls",
+    "terraformls", "helm_ls", "gh_actions_ls", "rust_analyzer"
 }
 
 return {
@@ -67,7 +68,94 @@ return {
             -- overwirte config for something special(e.g. clang)
             vim.lsp.config("clangd", {
                 root_markers = roots.clangd,
-                cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" },
+                cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google", "--clang-tidy", "--backgrond-index" },
+            })
+
+            vim.lsp.config("rust_analyzer", {
+                root_markers = roots.rust_analyzer,
+                settings = {
+                    ["rust-analyzer"] = {
+                        cargo = {
+                            allFeatures = true,
+                        },
+                        check = {
+                            command = "clippy",
+                        },
+                        inlayHints = {
+                            enable = true,
+                            locationLinks = false,
+                        },
+                        diagnostics = {
+                            enable = true,
+                        },
+                    },
+                },
+            })
+
+            vim.lsp.config("gopls", {
+                root_markers = roots.gopls,
+                settings = {
+                    gopls = {
+                        analyses = {
+                            unusedparams = true,
+                            nilness = true,
+                            shadow = true,
+                        },
+                        staticcheck = true,
+                        gofumpt = true,
+                    },
+                },
+            })
+
+            vim.lsp.config("pyright", {
+                root_markers = roots.pyright,
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "basic", -- strict로 바꾸면 더 엄격하게 체크
+                            autoImportCompletions = true,
+                            useLibraryCodeForTypes = true,
+                        },
+                    },
+                },
+            })
+
+            vim.lsp.config("ts_ls", {
+                root_markers = roots.ts_ls,
+                settings = {
+                    typescript = {
+                        preferences = {
+                            importModuleSpecifier = "relative",
+                        },
+                        inlayHints = {
+                            includeInlayParameterNameHints = "all",
+                            includeInlayVariableTypeHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                        },
+                    },
+                    javascript = {
+                        inlayHints = {
+                            includeInlayParameterNameHints = "all",
+                            includeInlayVariableTypeHints = true,
+                        },
+                    },
+                },
+            })
+
+            vim.lsp.config("lua_ls", {
+                root_markers = roots.lua_ls,
+                settings = {
+                    Lua = {
+                        runtime = { version = "LuaJIT" },
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            library = vim.api.nvim_get_runtime_file("", true),
+                            checkThirdParty = false,
+                        },
+                    },
+                },
             })
 
             -- auto-enable
