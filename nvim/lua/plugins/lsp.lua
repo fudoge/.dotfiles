@@ -68,7 +68,7 @@ return {
             -- overwirte config for something special(e.g. clang)
             vim.lsp.config("clangd", {
                 root_markers = roots.clangd,
-                cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google", "--clang-tidy", "--backgrond-index" },
+                cmd = { "clangd", "--header-insertion=never", "--query-driver=/usr/bin/g++", "--fallback-style=Google" },
             })
 
             vim.lsp.config("rust_analyzer", {
