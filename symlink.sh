@@ -110,3 +110,4 @@ done
 
 
 log "✅ Linking complete! Happy Coding! 😊"
+log "Reload .zshrc: source ~/.zshrc"
