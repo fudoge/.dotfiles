@@ -26,7 +26,6 @@ GHOSTTY_SHADERS_DST="$(dirname "$GHOSTTY_DST")/shaders"
 # --- links ----------
 LINKS=(
     "$DOTFILES_DIR/zsh/.zshrc:$HOME/.zshrc"
-    "$DOTFILES_DIR/spaceship/.spaceshiprc.zsh:$HOME/.spaceshiprc.zsh"
     "$DOTFILES_DIR/tmux/.tmux.conf:$HOME/.tmux.conf"
     "$DOTFILES_DIR/nvim:$HOME/.config/nvim"
     "${GHOSTTY_SRC}:${GHOSTTY_DST}"
