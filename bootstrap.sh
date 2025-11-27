@@ -104,31 +104,38 @@ else
     log "zoxide already installed."
 fi
 
-# install lsd
-if ! command -v lsd > /dev/null 2>&1; then
+# install eza
+if ! command -v eza > /dev/null 2>&1; then
     if [[ "$OS" == "Darwin" ]]; then
-        brew install lsd
+        brew install eza
     elif [[ "$OS" == "Linux" ]]; then
         case "$DISTRO" in
             arch|archlinux)
-                log "Installing lsd via pacman..."
-                pacman -S lsd
+                log "Installing eza via pacman..."
+                pacman -S eza
                 ;;
             ubuntu|debian)
-                log "Installing lsd via apt..."
-                apt install -y lsd
+                log "Installing eza via apt..."
+                sudo apt update
+                sudo apt install -y gpg
+                sudo mkdir -p /etc/apt/keyrings
+                wget -qO- https://raw.githubusercontent.com/eza-community/eza/main/deb.asc | sudo gpg --dearmor -o /etc/apt/keyrings/gierens.gpg
+                echo "deb [signed-by=/etc/apt/keyrings/gierens.gpg] http://deb.gierens.de stable main" | sudo tee /etc/apt/sources.list.d/gierens.list
+                sudo chmod 644 /etc/apt/keyrings/gierens.gpg /etc/apt/sources.list.d/gierens.list
+                sudo apt update
+                sudo apt install -y eza
                 ;;
             fedora)
-                log "Installing zoxide via dnf..."
-                dnf install -y lsd
+                log "Installing eza via dnf..."
+                sudo dnf install -y eza
                 ;;
             *)
-                warn "No known package manager for '$DISTRO'. Skipping zoxide."
+                warn "No known package manager for '$DISTRO'. Skipping eza."
                 ;;
         esac
     fi
 else
-    log "lsd already installed"
+    log "eza already installed"
 fi
 
 # install starship
