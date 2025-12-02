@@ -11,5 +11,9 @@ OS="$(uname -s)"
 DISTRO="MacOS"
 
 # vivaldi
-log "Installing vivaldi.."
-pacman -S vivaldi
+if ! command -v vivaldi > /dev/null 2>&1; then
+    log "Installing vivaldi.."
+    pacman -S vivaldi
+else
+    log "Vivaldi already exists. skipping..."
+fi
