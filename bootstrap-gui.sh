@@ -17,3 +17,19 @@ if ! command -v vivaldi > /dev/null 2>&1; then
 else
     log "Vivaldi already exists. skipping..."
 fi
+
+# Hyprland
+if ! command -v hyprland > /dev/null 2>&1; then
+    log "Installing hyprland.."
+    pacman -S hyprland
+else
+    log "Hyprland already exists. skipping..."
+fi
+
+# Hyprpanel
+if ! command -v hyprpanel > /dev/null 2>&1; then
+    log "Installing Hyprpanel"...
+    paru -S ags-hyprpanel-git
+else
+    log "Hyprpanel already exists. skipping..."
+fi
