@@ -165,4 +165,27 @@ else
     log "starship prompt already installed"
 fi
 
+# insatll tree-sitter-cli
+if ! command -v tree-sitter > /dev/null 2>&1; then
+    log "Installing tree-sitter-cli via cargo..."
+    cargo install tree-sitter-cli
+else
+    log "tree-sitter-cli already installed"
+fi
+
+if ! command -v gh > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "Installing github-cli via homebrew"
+        brew install gh
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing github-cli via pacman"
+                pacman -S github-cli
+        esac
+    fi
+else
+    log "Github-cli already exists"
+fi
+
 log "Bootstrap finished. Link your dotfiles next."
