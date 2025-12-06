@@ -173,6 +173,7 @@ else
     log "tree-sitter-cli already installed"
 fi
 
+# install gh-cli
 if ! command -v gh > /dev/null 2>&1; then
     if [[ "$OS" == Darwin ]]; then
         log "Installing github-cli via homebrew"
@@ -186,6 +187,37 @@ if ! command -v gh > /dev/null 2>&1; then
     fi
 else
     log "Github-cli already exists"
+fi
+
+# install fastfetch
+if ! command -v fastfetch > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "Installing fastfetch via homebrew"
+        brew install fastfetch 
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing fastfetch via pacman"
+                pacman -S fastfetch
+        esac
+    fi
+else
+    log "Fastfetch already exists"
+fi
+
+# install nitch
+if ! command -v nitch > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "There's no nitch support for MacOS yet."
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing nitch via paru"
+                paru -S nitch
+        esac
+    fi
+else
+    log "Nitch already exists"
 fi
 
 log "Bootstrap finished. Link your dotfiles next."
