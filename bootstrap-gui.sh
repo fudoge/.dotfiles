@@ -29,7 +29,24 @@ fi
 # Hyprpanel
 if ! command -v hyprpanel > /dev/null 2>&1; then
     log "Installing Hyprpanel"...
+    paru -S --needed aylurs-gtk-shell-git wireplumber libgtop bluez bluez-utils btop networkmanager dart-sass wl-clipboard brightnessctl swww python upower pacman-contrib power-profiles-daemon gvfs gtksourceview3 libsoup3 grimblast-git wf-recorder-git hyprpicker matugen-bin python-gpustat hyprsunset-git
     paru -S ags-hyprpanel-git
 else
     log "Hyprpanel already exists. skipping..."
+fi
+
+# jetbrains-mono-nf
+if fc-list | grep -qi "JetBrains"; then
+    log "Jetbrains Mono NF already exists. skipping..."
+else
+    log "Installing Jetbrains Mono NF..."
+    paru -S ttf-jetbrains-mono-nerd
+fi
+
+# MesloLSG NF
+if fc-list | grep -qi "MesloLGS"; then
+    log "MesloLGS NF already exists. skipping..."
+else
+    log "Installing MesloLGS NF..."
+    paru -S ttf-meslo-nerd
 fi
