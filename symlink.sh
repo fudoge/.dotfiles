@@ -31,6 +31,7 @@ LINKS=(
     "${GHOSTTY_SRC}:${GHOSTTY_DST}"
     "${GHOSTTY_SHADERS_SRC}:${GHOSTTY_SHADERS_DST}"
     "$DOTFILES_DIR/starship/starship.toml:$HOME/.config/starship.toml"
+    "$DOTFILES_DIR/terraform/.terraformrc:$HOME/.terraformrc"
 )
 
 ensure_parent_dir() {
@@ -107,6 +108,9 @@ for pair in "${LINKS[@]}"; do
         log "Linked -> $dst"
     fi
 done
+
+log "ensuring directory to exist: $HOME/.terraform.d/plugin-cache"
+ensure_parent_dir "$HOME/.terraform.d/plugin-cache"
 
 
 log "✅ Linking complete! Happy Coding! 😊"
