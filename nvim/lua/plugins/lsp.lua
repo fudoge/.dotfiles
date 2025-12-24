@@ -19,14 +19,15 @@ local roots = {
     biome = { "biome.json", "biome.jsonc", "package.json", ".git" },
     helm_ls = { "Chart.yaml", ".git" },
     gh_actions_ls = { ".github/workflows", ".git" },
-    rust_analyzer = { "Cargo.toml", ".git" }
+    rust_analyzer = { "Cargo.toml", ".git" },
+    nixd = { "flake.nix", "flake.lock", "configuration.nix", ".git" }
 }
 
 local servers = {
     "lua_ls", "ts_ls", "gopls", "bashls", "cssls", "clangd",
     "docker_compose_language_service", "graphql", "jdtls", "biome", "ltex",
     "nginx_language_server", "sqls", "yamlls", "pyright", "dockerls",
-    "terraformls", "helm_ls", "gh_actions_ls", "rust_analyzer"
+    "terraformls", "helm_ls", "gh_actions_ls", "rust_analyzer", "nixd"
 }
 
 return {
@@ -158,6 +159,23 @@ return {
                 },
             })
 
+            vim.lsp.config("nixd", {
+                settings = {
+                    nixd = {
+                        nixpkgs = {
+                            expr = "import <nixpkgs> {}",
+                        },
+                        formatting = {
+                            command = { "nixfmt" },
+                        },
+                        options = {
+                            nixos = {
+                                expr = '(builtins.getFlake "/etc/nixos").nixosConfigurations.thinkpad.options',
+                            },
+                        },
+                    },
+                },
+            })
             -- auto-enable
             vim.lsp.enable(servers)
 
