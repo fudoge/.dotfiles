@@ -1,0 +1,8 @@
+alias cl='clear'
+alias ls='eza --icons'
+alias tf='terraform'
+alias cd='z'
+alias k='kubectl'
+alias cat='bat'
+alias sk='sk --preview="bat {} --color=always"'
+
