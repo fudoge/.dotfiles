@@ -221,14 +221,14 @@ else
 fi
 
 # install bat
-if ! command -v nitch > /dev/null 2>&1; then
+if ! command -v bat > /dev/null 2>&1; then
     if [[ "$OS" == Darwin ]]; then
         log "Installing bat via homebrew"
         brew install bat
     elif [[ "$OS" == "Linux" ]]; then
         case "$DISTRO" in
             arch|archlinux)
-                log "Installing nitch via paru"
+                log "Installing bat via paru"
                 paru -S bat
         esac
     fi
@@ -237,7 +237,7 @@ else
 fi
 
 # install sk
-if ! command -v nitch > /dev/null 2>&1; then
+if ! command -v sk > /dev/null 2>&1; then
     if [[ "$OS" == Darwin ]]; then
         log "Installing skim via homebrew"
         brew install sk
@@ -253,7 +253,7 @@ else
 fi
 
 # install bottom
-if ! command -v nitch > /dev/null 2>&1; then
+if ! command -v bottom > /dev/null 2>&1; then
     if [[ "$OS" == Darwin ]]; then
         log "Installing bottom via homebrew"
         brew install bottom
