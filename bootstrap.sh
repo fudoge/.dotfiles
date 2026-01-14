@@ -220,4 +220,52 @@ else
     log "Nitch already exists"
 fi
 
+# install bat
+if ! command -v nitch > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "Installing bat via homebrew"
+        brew install bat
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing nitch via paru"
+                paru -S bat
+        esac
+    fi
+else
+    log "bat already exists"
+fi
+
+# install sk
+if ! command -v nitch > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "Installing skim via homebrew"
+        brew install sk
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing sk via paru"
+                paru -S skim
+        esac
+    fi
+else
+    log "skim already exists"
+fi
+
+# install bottom
+if ! command -v nitch > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "Installing bottom via homebrew"
+        brew install bottom
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing bottom via paru"
+                paru -S bottom
+        esac
+    fi
+else
+    log "bottom already exists"
+fi
+
 log "Bootstrap finished. Link your dotfiles next."
