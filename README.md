@@ -41,3 +41,4 @@ pacman -S git gcc make cmake neovim tmux ghostty zsh tree-sitter-cli nodejs pyth
 - `zsh/path.zsh:`: $PATH
 - `zsh/config.zsh`: other configurations
 
+## nix
