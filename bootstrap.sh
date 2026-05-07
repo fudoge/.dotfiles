@@ -268,4 +268,35 @@ else
     log "bottom already exists"
 fi
 
+# install spicetify
+if ! command -v spicetify > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "Installing spicetify via homebrew"
+        brew install spicetify-cli
+        spicetify config spotify_path "/Applications/Spotify.app/Contents/Resources"
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing specetify via paru"
+                paru -S spicetify-cli
+        esac
+    # marketplace
+    curl -fsSL https://raw.githubusercontent.com/spicetify/marketplace/main/resources/install.sh | sh
+        
+    git clone --depth=1 https://github.com/spicetify/spicetify-themes.git ~/spicetify-themes
+
+    mkdir -p ~/.config/spicetify/Themes
+    cp -r ~/spicetify-themes/* ~/.config/spicetify/Themes/
+
+    rm -rf ~/spicetify-themes
+
+    spicetify config current_theme Ziro
+    spicetify config color_scheme rose-pine-moon
+    spicetify apply
+
+    fi
+else
+    log "spicetify already exists"
+fi
+
 log "Bootstrap finished. Link your dotfiles next."
