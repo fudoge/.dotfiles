@@ -32,6 +32,7 @@ LINKS=(
     "${GHOSTTY_SHADERS_SRC}:${GHOSTTY_SHADERS_DST}"
     "$DOTFILES_DIR/starship/starship.toml:$HOME/.config/starship.toml"
     "$DOTFILES_DIR/terraform/.terraformrc:$HOME/.terraformrc"
+    "$DOTFILES_DIR/fastfetch/config.jsonc:$HOME/.config/fastfetch/config.jsonc"
 )
 
 ensure_parent_dir() {
