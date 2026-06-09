@@ -19,6 +19,13 @@ else
     GHOSTTY_DST="$HOME/.config/ghostty/config"
 fi
 
+# Fastfetch config 
+if [[ "$OS" == "Darwin" ]]; then
+    FASTFETCH_SRC="$DOTFILES_DIR/fastfetch/mac.jsonc"
+else
+    FASTFETCH_SRC="$DOTFILES_DIR/fastfetch/linux.jsonc"
+fi
+
 # Ghostty shaders path
 GHOSTTY_SHADERS_SRC="$DOTFILES_DIR/ghostty/shaders"
 GHOSTTY_SHADERS_DST="$(dirname "$GHOSTTY_DST")/shaders"
@@ -32,7 +39,7 @@ LINKS=(
     "${GHOSTTY_SHADERS_SRC}:${GHOSTTY_SHADERS_DST}"
     "$DOTFILES_DIR/starship/starship.toml:$HOME/.config/starship.toml"
     "$DOTFILES_DIR/terraform/.terraformrc:$HOME/.terraformrc"
-    "$DOTFILES_DIR/fastfetch/config.jsonc:$HOME/.config/fastfetch/config.jsonc"
+    "${FASTFETCH_SRC}:$HOME/.config/fastfetch/config.jsonc"
 )
 
 ensure_parent_dir() {
