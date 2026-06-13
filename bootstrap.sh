@@ -189,6 +189,22 @@ else
     log "Github-cli already exists"
 fi
 
+# install forgejo-cli
+if ! command -v fj > /dev/null 2>&1; then
+    if [[ "$OS" == Darwin ]]; then
+        log "Installing forgejo-cli via homebrew"
+        brew install forgejo-cli
+    elif [[ "$OS" == "Linux" ]]; then
+        case "$DISTRO" in
+            arch|archlinux)
+                log "Installing forgejo-cli via pacman"
+                pacman -S forgejo-cli
+        esac
+    fi
+else
+    log "Forgejo-cli already exists"
+fi
+
 # install fastfetch
 if ! command -v fastfetch > /dev/null 2>&1; then
     if [[ "$OS" == Darwin ]]; then
