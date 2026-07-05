@@ -1,5 +1,5 @@
 return {
-  'catppuccin/nvim',
-  name = "catppuccin",
-  priority = 1001
+    'catppuccin/nvim',
+    name = "catppuccin",
+    priority = 999
 }

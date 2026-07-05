@@ -2,7 +2,7 @@ return {
     'lmantw/themify.nvim',
 
     lazy = false,
-    priority = 999,
+    priority = 1002,
 
     config = function()
         require('themify').setup({
@@ -16,6 +16,7 @@ return {
             'marko-cerovac/material.nvim',
             'Mofiqul/dracula.nvim',
             'rebelot/kanagawa.nvim',
+            'fudoge/lumin.nvim',
             'default'
         })
     end
