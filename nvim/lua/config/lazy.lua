@@ -15,12 +15,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Make sure to setup `mapleader` and `maplocalleader` before
--- loading lazy.nvim so that mappings are correct.
--- This is also a good place to setup other settings (vim.opt)
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
 require("config.globals")
 require("config.keymaps")
 require("config.options")
@@ -41,22 +35,8 @@ require("lazy").setup({
 -- Setup yank to system clipboard..
 local universal_utils = require("config.universal")
 
-if universal_utils.is_mac() or universal_utils.is_windows() or universal_utils.is_linux then
+if universal_utils.is_mac() or universal_utils.is_windows() or universal_utils.is_linux() then
     vim.opt.clipboard:append { "unnamedplus" }
-elseif universal_utils.is_wsl() then
-    vim.opt.clipboard:append { "unnamedplus" }
-    vim.g.clipboard = {
-        name = "WSL clipboard",
-        copy = {
-            ["+"] = "win32yank.exe -i --crlf",
-            ["*"] = "win32yank.exe -i --crlf",
-        },
-        paste = {
-            ['+'] = "win32yank.exe -o -lf",
-            ['*'] = "win32yank.exe -o --lf",
-        },
-        cache_enabled = 0,
-    }
 end
 
 -- block cursor
@@ -88,9 +68,9 @@ vim.diagnostic.config({
 })
 
 -- opacity
-vim.cmd [[
-  highlight Normal guibg=none
-  highlight NonText guibg=none
-  highlight Normal ctermbg=none
-  highlight NonText ctermbg=none
-]]
+-- vim.cmd [[
+--   highlight Normal guibg=none
+--   highlight NonText guibg=none
+--   highlight Normal ctermbg=none
+--   highlight NonText ctermbg=none
+-- ]]

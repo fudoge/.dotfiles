@@ -13,7 +13,7 @@ OS="$(uname -s)"
 # Ghostty config path
 if [[ "$OS" == "Darwin" ]]; then
     GHOSTTY_SRC="$DOTFILES_DIR/ghostty/mac.config"
-    GHOSTTY_DST="$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+    GHOSTTY_DST="$HOME/.config/ghostty/config"
 else
     GHOSTTY_SRC="$DOTFILES_DIR/ghostty/linux.config"
     GHOSTTY_DST="$HOME/.config/ghostty/config"
@@ -30,6 +30,10 @@ fi
 GHOSTTY_SHADERS_SRC="$DOTFILES_DIR/ghostty/shaders"
 GHOSTTY_SHADERS_DST="$(dirname "$GHOSTTY_DST")/shaders"
 
+# Ghostty shaders path
+GHOSTTY_CUSTOM_THEME_SRC="$DOTFILES_DIR/ghostty/themes"
+GHOSTTY_CUSTOM_THEME_DST="$(dirname "$GHOSTTY_DST")/themes"
+
 # --- links ----------
 LINKS=(
     "$DOTFILES_DIR/zsh/.zshrc:$HOME/.zshrc"
@@ -37,6 +41,7 @@ LINKS=(
     "$DOTFILES_DIR/nvim:$HOME/.config/nvim"
     "${GHOSTTY_SRC}:${GHOSTTY_DST}"
     "${GHOSTTY_SHADERS_SRC}:${GHOSTTY_SHADERS_DST}"
+    "${GHOSTTY_CUSTOM_THEME_SRC}:${GHOSTTY_CUSTOM_THEME_DST}"
     "$DOTFILES_DIR/starship/starship.toml:$HOME/.config/starship.toml"
     "$DOTFILES_DIR/terraform/.terraformrc:$HOME/.terraformrc"
     "${FASTFETCH_SRC}:$HOME/.config/fastfetch/config.jsonc"

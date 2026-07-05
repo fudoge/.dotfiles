@@ -1,6 +1,10 @@
 return {
     "azorng/goose.nvim",
     config = function()
+        if vim.fn.executable("goose") == 0 then
+            return
+        end
+
         -- Default configuration with all available options
         require('goose').setup({
             default_global_keymaps = true, -- If false, disables all default global keymaps

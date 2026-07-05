@@ -7,3 +7,6 @@ format = '$time ($style) '
 
 [cpp]
 disabled = false
+
+[git_branch]
+style = "#EFB080"
