@@ -1,6 +1,7 @@
 return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    event = { "BufReadPost", "BufNewFile" },
     config = function()
         local function setup_treesitter_query_compat()
             local query = require("vim.treesitter.query")
@@ -108,13 +109,12 @@ return {
         local configs = require("nvim-treesitter.configs")
 
         configs.setup({
-            ensure_installed = { "terraform", "hcl", "lua", "go", "java", "c", "go", "cpp", "javascript", "typescript", "html", "dart", "css", "gitignore", "gomod", "gosum", "http", "json", "latex", "nginx", "python", "sql", "swift", "yaml", "dockerfile" },
+            ensure_installed = { "terraform", "hcl", "lua", "go", "java", "c", "cpp", "javascript", "typescript", "html", "dart", "css", "gitignore", "gomod", "gosum", "http", "json", "latex", "nginx", "python", "sql", "swift", "yaml", "dockerfile" },
             sync_install = false,
+            auto_install = false,
             highlight = { enable = true },
             indent = { enable = true },
         })
         setup_treesitter_query_compat()
-
-        require("nvim-ts-autotag").setup()
     end
 }

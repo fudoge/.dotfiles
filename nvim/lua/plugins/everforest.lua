@@ -1,11 +1,7 @@
 return {
     'sainnhe/everforest',
-    lazy = false,
-    priority = 1005,
-    config = function()
-        -- Optionally configure and load the colorscheme
-        -- directly inside the plugin declaration.
+    lazy = true,
+    init = function()
         vim.g.everforest_enable_italic = true
-        vim.cmd.colorscheme('everforest')
     end
 }

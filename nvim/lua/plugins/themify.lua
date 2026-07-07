@@ -1,8 +1,6 @@
 return {
     'lmantw/themify.nvim',
-
-    lazy = false,
-    priority = 1002,
+    cmd = "Themify",
 
     config = function()
         require('themify').setup({

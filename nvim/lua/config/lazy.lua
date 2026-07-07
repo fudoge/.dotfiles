@@ -14,6 +14,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     end
 end
 vim.opt.rtp:prepend(lazypath)
+vim.loader.enable()
 
 require("config.globals")
 require("config.keymaps")
@@ -30,6 +31,18 @@ require("lazy").setup({
     install = { colorscheme = { "habamax" } },
     -- automatically check for plugin updates
     checker = { enabled = true },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "netrwPlugin",
+                "tarPlugin",
+                "tohtml",
+                "tutor",
+                "zipPlugin",
+            },
+        },
+    },
 })
 
 -- Setup yank to system clipboard..
@@ -45,7 +58,7 @@ vim.opt.guicursor = "n-v-c:block"
 
 vim.diagnostic.config({
     virtual_text = false,
-    virtual_lines = true,
+    virtual_lines = false,
     underline = true,
     update_in_insert = false,
     severity_sort = true,

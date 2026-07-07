@@ -4,7 +4,10 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
-  lazy = false,
+  cmd = "Refactor",
+  keys = {
+    { "<leader>r", mode = { "n", "x" } },
+  },
   config = function()
     require("refactoring").setup()
   end,

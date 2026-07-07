@@ -5,6 +5,13 @@ return {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
 -- or                              , branch = '0.1.x',
       dependencies = { 'nvim-lua/plenary.nvim' },
+      cmd = "Telescope",
+      keys = {
+        { "<leader>ff", function() require("telescope.builtin").find_files() end },
+        { "<leader>fg", function() require("telescope.builtin").live_grep() end },
+        { "<leader>fb", function() require("telescope.builtin").buffers() end },
+        { "<leader>fh", function() require("telescope.builtin").help_tags() end },
+      },
       config = function()
         local builtin = require("telescope.builtin")
         mapKey('<leader>ff', builtin.find_files)
@@ -12,9 +19,10 @@ return {
         mapKey('<leader>fb', builtin.buffers)
         mapKey('<leader>fh', builtin.help_tags)
       end,
-   },
+  },
   {
     'nvim-telescope/telescope-ui-select.nvim',
+    event = "VeryLazy",
     config = function()
       -- This is your opts table
       require("telescope").setup {
@@ -46,4 +54,3 @@ return {
     end
   }
 }
-

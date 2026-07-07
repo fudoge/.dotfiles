@@ -5,6 +5,14 @@ return {
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim", -- 추가
     },
+    keys = {
+        "<leader>a",
+        "<C-e>",
+        "<leader>hp",
+        "<leader>hn",
+        "<leader>hd",
+        "<leader>hc",
+    },
     config = function()
         local harpoon = require("harpoon")
         harpoon:setup()
