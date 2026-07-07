@@ -51,6 +51,3 @@ mapKey("<Space>bn", "<Cmd>BufferOrderByName<CR>", "n")
 mapKey("<Space>bd", "<Cmd>BufferOrderByDirectory<CR>", "n")
 mapKey("<Space>bl", "<Cmd>BufferOrderByLanguage<CR>", "n")
 mapKey("<Space>bw", "<Cmd>BufferOrderByWindowNumber<CR>", "n")
-
--- FindCmdline
-mapKey(":", "<cmd>FineCmdline<CR>", "n")

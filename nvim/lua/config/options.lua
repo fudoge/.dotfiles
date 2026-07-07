@@ -22,6 +22,6 @@ opt.signcolumn = "yes"
 
 -- etc
 opt.encoding = "UTF-8"
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.scrolloff = 10
 opt.mouse:append("a")
